@@ -1,11 +1,12 @@
-package com.coolweather.android.util;
+package com.todayweather.android.util;
 
 import android.text.TextUtils;
+import android.util.Log;
 
-import com.coolweather.android.db.City;
-import com.coolweather.android.db.County;
-import com.coolweather.android.db.Province;
-import com.coolweather.android.gson.Weather;
+import com.todayweather.android.db.City;
+import com.todayweather.android.db.County;
+import com.todayweather.android.db.Province;
+import com.todayweather.android.gson.Weather;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -17,6 +18,8 @@ import org.json.JSONObject;
  */
 
 public class Utility {
+    public static final String TAG = "Utility";
+
 
     public static boolean handleProvincesResponse(String response) {
         if (!TextUtils.isEmpty(response)) {
@@ -29,6 +32,7 @@ public class Utility {
                     province.setProvinceCode(jsonObject.getInt("id"));
                     province.save();
                 }
+                Log.e(TAG, "handleProvincesResponse: " + response);
                 return true;
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -49,6 +53,7 @@ public class Utility {
                     city.setProvinceId(provinceId);
                     city.save();
                 }
+                Log.e(TAG, "handleCitesResponse: " + response);
                 return true;
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -69,6 +74,7 @@ public class Utility {
                     county.setCityId(cityId);
                     county.save();
                 }
+                Log.e(TAG, "handleCountiesResponse: " + response);
                 return true;
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -85,6 +91,7 @@ public class Utility {
             JSONObject jsonObject = new JSONObject(response);
             JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
             String weatherContent = jsonArray.getJSONObject(0).toString();
+            Log.e(TAG, "handleWeatherResponse: " + response);
             return new Gson().fromJson(weatherContent, Weather.class);
         } catch (Exception e) {
             e.printStackTrace();

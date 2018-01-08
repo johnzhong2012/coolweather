@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.coolweather.android.WeatherActivity"
+    tools:context="com.todayweather.android.WeatherActivity"
     android:background="@color/colorPrimary">
 
     <ImageView
@@ -52,7 +52,7 @@
         <fragment
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="com.coolweather.android.ChooseAreaFragment"
+            android:name="com.todayweather.android.ChooseAreaFragment"
             android:id="@+id/choose_area_fragment"
             android:layout_gravity="start" />
     </android.support.v4.widget.DrawerLayout>

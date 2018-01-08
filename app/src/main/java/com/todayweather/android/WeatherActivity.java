@@ -1,4 +1,4 @@
-package com.coolweather.android;
+package com.todayweather.android;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,11 +21,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.coolweather.android.gson.Forecast;
-import com.coolweather.android.gson.Weather;
-import com.coolweather.android.service.AutoUpdateService;
-import com.coolweather.android.util.HttpUtil;
-import com.coolweather.android.util.Utility;
+import com.todayweather.android.gson.Forecast;
+import com.todayweather.android.gson.Weather;
+import com.todayweather.android.service.AutoUpdateService;
+import com.todayweather.android.util.HttpUtil;
+import com.todayweather.android.util.Utility;
 
 import java.io.IOException;
 
