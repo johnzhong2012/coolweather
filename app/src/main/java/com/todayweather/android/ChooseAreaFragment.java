@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -260,4 +261,30 @@ public class ChooseAreaFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                    if (currentLevel == LEVEL_COUNTY) {
+                        queryCities();
+                    } else if (currentLevel == LEVEL_CITY) {
+                        queryProvinces();
+                    } else if (currentLevel == LEVEL_PROVINCE) {
+                        Activity activity = getActivity();
+                        if (activity != null && activity instanceof WeatherActivity) {
+                            WeatherActivity weatherActivity = (WeatherActivity) activity;
+                            weatherActivity.closeChooseArea();
+                        }
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
 }

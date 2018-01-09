@@ -223,4 +223,8 @@ public class WeatherActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AutoUpdateService.class);
         startService(intent);
     }
+
+    public void closeChooseArea() {
+        mDrawerLayout.closeDrawer(GravityCompat.START);
+    }
 }
