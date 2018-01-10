@@ -125,6 +125,29 @@ public class ChooseAreaFragment extends Fragment {
             }
         });
 
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                    if (currentLevel == LEVEL_COUNTY) {
+                        queryCities();
+                    } else if (currentLevel == LEVEL_CITY) {
+                        queryProvinces();
+                    } else if (currentLevel == LEVEL_PROVINCE) {
+                        Activity activity = getActivity();
+                        if (activity != null && activity instanceof WeatherActivity) {
+                            WeatherActivity weatherActivity = (WeatherActivity) activity;
+                            weatherActivity.closeChooseArea();
+                        }
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+
         queryProvinces();
     }
 
@@ -259,32 +282,5 @@ public class ChooseAreaFragment extends Fragment {
         if (mProgressDialog != null) {
             mProgressDialog.dismiss();
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    if (currentLevel == LEVEL_COUNTY) {
-                        queryCities();
-                    } else if (currentLevel == LEVEL_CITY) {
-                        queryProvinces();
-                    } else if (currentLevel == LEVEL_PROVINCE) {
-                        Activity activity = getActivity();
-                        if (activity != null && activity instanceof WeatherActivity) {
-                            WeatherActivity weatherActivity = (WeatherActivity) activity;
-                            weatherActivity.closeChooseArea();
-                        }
-                    }
-                    return true;
-                }
-                return false;
-            }
-        });
     }
 }
